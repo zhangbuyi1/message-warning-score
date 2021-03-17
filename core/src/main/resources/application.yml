@@ -1,0 +1,16 @@
+server:
+  port: 8191
+
+spring:
+  application:
+    name: message-warning-score-core
+  profiles:
+#    active: @profiles.active@,@profiles.active@-config
+    active: dev,dev-config
+
+logging:
+  level:
+    root: INFO
+    com.emdata.base: debug
+mybatis-plus:
+  mapper-locations: "classpath*:mapper/*.xml"

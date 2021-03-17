@@ -1,0 +1,22 @@
+data:
+  ip: 192.168.70.71
+
+spring:
+  datasource:
+    name:  base_service
+    url: jdbc:mysql://${data.ip}:3306/base_service?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driverClassName: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+  redis:
+    database: 0
+    host: ${data.ip}
+    password: ubuntu
+    port: 6379
+    timeout: 10000ms
+    jedis:
+      pool:
+        min-idle: 0
+        max-idle: 5

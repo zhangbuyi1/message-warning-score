@@ -1,0 +1,56 @@
+spring:
+  cloud:
+    client:
+      ipAddress: 192.168.70.151
+warning:
+  airportImpl:
+    ZSSS: airportShImpl
+    ZSPD: airportShImpl
+
+  areaImpl:
+    ZSSS: areaShImpl
+    ZSPD: areaShImpl
+
+  terminalImpl:
+    ZSSS: terminalShImpl
+    ZSPD: terminalShImpl
+
+  mdrsImpl:
+    ZSSS: mdrsShImpl
+    ZSPD: mdrsShImpl
+
+monitor:
+  #监控文件夹目录
+  filePath: /data/metar
+  # 本地发送远程mq失败次数
+  thisQueueRetrtCount: 5
+  radarPath: /data/radar/source
+  # 雷达code
+  radarAirportCode: ZSSS
+  # 是否是源数据范围 一个源数据 生成一张图片 还是一个时间范围内所有源数据生成一张图片
+  radarIsTimeRange: true
+  # 五分钟内的所有图片
+  radarTimeRange: 5
+  # 存放雷达图片
+  radarPicPath: /data/radar/pic
+# 雷达数据解析服务
+server:
+   rule:
+    radar:
+      RADAR_SERVER:
+       - host: 192.168.70.152
+         port: 8849
+         survival: /radar/read_source_exist
+       - host: 192.168.70.152
+         port: 9527
+         survival: /radar/read_source_exist
+       - host: 192.168.70.153
+         port: 9527
+         survival: /radar/read_source_exist
+       - host: 192.168.70.154
+         port: 9527
+         survival: /radar/read_source_exist
+      TEST:
+        - host: 192.168.70.152
+          port: 8849
+          survival: /radar/read_source_exist

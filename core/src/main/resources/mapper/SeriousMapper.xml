@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emdata.messagewarningscore.common.dao.SeriousMapper">
+    <resultMap id="BaseResultMap" type="com.emdata.messagewarningscore.common.dao.entity.SeriousDO">
+        <id column="id" property="id"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="airport_code" property="airportCode"/>
+        <result column="serious_weather" property="seriousWeather"
+                typeHandler="com.emdata.messagewarningscore.common.handler.EvaluationWeatherHandler"/>
+        <result column="radar_echo" property="radarEcho"/>
+        <result column="location_id" property="locationId"/>
+        <result column="status" property="status"/>
+        <result column="is_score" property="isScore"/>
+
+    </resultMap>
+
+    <select id="findBetweenDate" resultMap="BaseResultMap">
+        select * from serious
+        where start_time &gt;= STR_TO_DATE(CONCAT(#{startDay,jdbcType=VARCHAR},"00:00:00"),'%Y-%m-%d %H:%i:%s')
+        and start_time &lt;= STR_TO_DATE(CONCAT(#{endDay,jdbcType=VARCHAR},"23:59:59"),'%Y-%m-%d %H:%i:%s')
+        and airport_code = #{airportCode}
+    </select>
+</mapper>
